@@ -39,11 +39,15 @@ static Random ram = new Random();
                     Instruccion(ins,arrayR);
                 break;
                 case 2:
-                    System.out.println("Ingrese 4 enteros ");
-                    int num = read.nextInt();
+                    System.out.println("Ingrese un numero de 4 cifras digito por digito ");
+                    int num=0; 
                     int[] array = lectura(num);
                     print(array);
-                    System.out.println("");
+                    print(descent(array));
+                    System.out.println("Array ordenado");
+                    int[] arrayd = print(ascendente(array));
+                    int[] arraya = print(descent(arrayd));
+
                     System.out.println(arregloaint(array));
                     
                     
@@ -96,11 +100,18 @@ static Random ram = new Random();
     }
     //metodos del Kaprekar
     public static int[]lectura(int num){
-         int array1[] = new int [4];
+        int c=0; 
+        int array1[] = new int [4];
          for (int i = 0; i <4; i++) {
-             System.out.println("Ingrese 4 elementos");
+             System.out.println("Ingrese 1 elemento");
              num = read.nextInt();
              array1[i] += num;
+             if(array1[i]==array1[i]){
+                 c++;
+             }
+             if(c==4){
+                 System.out.println("Numero Ingresado no valido");
+             }
          }
          return array1;
      }
@@ -115,21 +126,36 @@ static Random ram = new Random();
     }
     public static int[] descent(int []arraya){
         int [] arrayd = new int [4];
-        for (int i = 0; i < arrayd.length; i++) {
-                  for (int j = arraya.length;; j--) {
-                
-            }
+        for (int i = arraya.length-1; i>=0; i--) {
+                 arrayd[i] = arraya[i]; 
                     }
         return arrayd;
     }
     public static int  arregloaint(int[] arreglo){ 
         int num = 0;
         for (int i = 0; i < arreglo.length; i++) {
-            
             num += (int)arreglo[i];
         }
         return num;
     }
+    public static int Kaprekar(int[]arraya,int[]arrayd ){
+        int res =0;
+        int num1 = arregloaint(arraya);
+        int num2 = arregloaint(arrayd);
+        while(res!=6174){
+            for (int i = 0; i < 7; i++) {
+               
+                if(num1>num2){
+                    res = num1-num2;
+                }else{
+                    res= num2-num1;
+                }
+            }
+        }
+        return res;
+    }
+ 
+    
     
 }//fin de la clase   
 
